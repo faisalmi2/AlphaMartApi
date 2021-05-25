@@ -13,7 +13,7 @@ SELECT "ConversationId", "SenderId",receivercontacts."ContactName" "SenderName",
 	FETCH FIRST 15 ROW ONLY; 
 
 	
-
+git remote add origin https://github.com/faisalmi2/ChatApi.git
 	
 
 -- WITH    
