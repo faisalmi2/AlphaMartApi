@@ -19,20 +19,22 @@ const Auth = async ({phoneNumber,password}) =>{
         
         return {success:true,userInfo:user};
     } catch (err) {
+        console.log(err);
         return 'user index: '+ err.message;
     }    
 }
 
 
-const GetContacts = async ({id}) =>{
+const GetContacts = async () =>{
     try {
         
         const pool = new Pool(config.sql);       
         const sqlQuery =await utils.loadSQLQueries('Account');
+       
+        const result = await pool.query(sqlQuery.contacts);        
         
-        const result = await pool.query(sqlQuery.contacts,[id]);        
         const contacts=result.rows;       
-
+        
         return {success:true,contacts:contacts};
     } catch (err) {
         return 'data => GetContacts '+ err.message;

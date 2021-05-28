@@ -4,10 +4,13 @@ const express =require('express');
 const AccountController = require('../controllers/AccountController');
 const router= express.Router();
 
-const {Auth,GetContacts} = AccountController;
+const {Auth,GetContacts,authenthicateToken} = AccountController;
 
-router.get('/Account/Auth',Auth);
-router.get('/Account/Contacts/:id',GetContacts);
+router.post('/Account/Auth',Auth);
+router.get('/Account/Contacts',authenthicateToken,GetContacts);
+
+
+
 
 module.exports={
     routes:router

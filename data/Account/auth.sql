@@ -1,3 +1,3 @@
-SELECT "UserId", "PhoneNumber", "Password"
-	FROM "Users"
+SELECT "UserId", "PhoneNumber", "Email", "Password"
+	FROM "AppUsers"
 	WHERE "PhoneNumber" = $1;
