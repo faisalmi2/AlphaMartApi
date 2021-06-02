@@ -15,7 +15,7 @@ const Auth = async (req,res,next) =>{
         const accessToken = generateAccessToken(data.userInfo);
         const refreshAccessToken = jwt.sign(data.userInfo,process.env.REFRESH_TOKEN_SECRET)
        
-        res.json({accessToken:accessToken ,refreshToken:refreshAccessToken, data:data});
+        res.json({accessToken:accessToken ,refreshToken:refreshAccessToken});
     } catch (err) {
         console.log(err);
         res.send(err);
@@ -24,7 +24,7 @@ const Auth = async (req,res,next) =>{
 
 function generateAccessToken(userInfo)
 {
-    return jwt.sign(userInfo,process.env.TOKEN_SECRET,{expiresIn:'30s'});
+    return jwt.sign(userInfo,process.env.TOKEN_SECRET,{expiresIn:'1hr'});
 }
 
 const GetContacts = async (req,res,next) =>{
