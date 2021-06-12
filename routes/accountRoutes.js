@@ -4,10 +4,13 @@ const express =require('express');
 const AccountController = require('../controllers/AccountController');
 const router= express.Router();
 
-const {Auth,GetContacts,authenthicateToken} = AccountController;
+const {Auth,GetUsersData,authenthicateToken,SignUp,ActivateDeactivateUser} = AccountController;
 
 router.post('/Account/Auth',Auth);
-router.get('/Account/Contacts',authenthicateToken,GetContacts);
+//router.get('/Account/Users',authenthicateToken,GetUsersData);
+router.get('/Account/Users',GetUsersData);
+router.post('/Account/SignUp',SignUp);
+router.post('/Account/activate',ActivateDeactivateUser);
 
 
 

@@ -1,2 +1,2 @@
-SELECT "UserId", "PhoneNumber", "Email", "Password"
-	FROM public."AppUsers";
+SELECT "UserId", "PhoneNumber", "Email", "Password","RoleId","IsApproved","FullName"
+	FROM "AppUsers";

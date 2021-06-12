@@ -22,23 +22,49 @@ const Auth = async (req,res,next) =>{
     }     
 }
 
-function generateAccessToken(userInfo)
-{
-    return jwt.sign(userInfo,process.env.TOKEN_SECRET,{expiresIn:'1hr'});
-}
+const SignUp= async (req,res,next)=>{
+    const {PhoneNumber,Password,Email,RoleId,FullName}= req.body;   
+    const user={PhoneNumber,Password,Email,RoleId,FullName};
 
-const GetContacts = async (req,res,next) =>{
+    const data= await authData.SignUp(user);
+    if(!data.success) return res.status(400).send(data.message);
+    res.send(data);
+} 
+
+const GetUsersData = async (req,res,next) =>{
   
     try {
        // console.log('header',req.test);
         //const id=req.params.id;        
-        const data= await authData.GetContacts();        
+        const data= await authData.GetUsers();        
         if(!data.success) return res.status(400).send(data.message);
          res.send(data);
         
     } catch (error) {
         
     }
+}
+
+
+const ActivateDeactivateUser = async (req,res,next) =>{
+  
+    try {
+       // console.log('header',req.test);
+        const UserId=req.body.UserId;        
+        const value=req.body.value;       
+
+        const data= await authData.ActivateUser(UserId,value);        
+        if(!data.success) return res.status(400).send(data.message);
+         res.send(data);
+        
+    } catch (error) {
+        
+    }
+}
+
+function generateAccessToken(userInfo)
+{
+    return jwt.sign(userInfo,process.env.TOKEN_SECRET,{expiresIn:'1hr'});
 }
 
 function authenthicateToken(req,res,next)
@@ -58,4 +84,4 @@ function authenthicateToken(req,res,next)
     })
 }
 
-module.exports={Auth,GetContacts,authenthicateToken}
+module.exports={Auth,GetUsersData,SignUp,authenthicateToken,ActivateDeactivateUser}

@@ -4,9 +4,8 @@ const ItemData = require('../data/Items');
 
 const GetItems = async (req,res,next) =>{
     try {
-       const data= await ItemData.GetItemsFromDb();
-       if(!data.success) return res.status(400).send(data.message);
-       console.log(data);
+        const data= await ItemData.GetItemsFromDb();
+        if(!data.success) return res.status(400).send(data.message);      
         res.json(data.items);
     } catch (err) {
         console.log(err);
