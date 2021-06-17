@@ -4,7 +4,9 @@ const ItemData = require('../data/Items');
 
 const GetItems = async (req,res,next) =>{
     try {
-        const data= await ItemData.GetItemsFromDb();
+        const {CategoryId,SearchText} =req.query;
+        
+        const data= await ItemData.GetItemsFromDb(CategoryId,SearchText);
         if(!data.success) return res.status(400).send(data.message);      
         res.json(data.items);
     } catch (err) {
@@ -14,7 +16,7 @@ const GetItems = async (req,res,next) =>{
 }
 
 const AddItem = async (req,res,next) =>{
-    try {
+    try { 
         const {ItemName, UnitId, Quantity, CostPrice, ActualPrice, SellingPrice, ItemCategoryId, IsActive, AddedBy}=req.body;
 
         const item={            

@@ -5,12 +5,14 @@ const config=require('../../config');
 
 const {Pool} =require('pg');
 
-const GetItemsFromDb = async () =>{
+const GetItemsFromDb = async (CategoryId,SearchText) =>{
     try {
+        
         const pool = new Pool(config.sql);       
         const sqlQuery =await utils.loadSQLQueries('Items');
         
-        const result = await pool.query(sqlQuery.items);        
+        const result = await pool.query(sqlQuery.items,[CategoryId,`%${SearchText}%`]);  
+        console.log(result);      
         const items=result.rows;
 
         return {success:true,items:items};
