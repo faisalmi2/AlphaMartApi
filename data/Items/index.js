@@ -9,10 +9,8 @@ const GetItemsFromDb = async (CategoryId,SearchText) =>{
     try {
         
         const pool = new Pool(config.sql);       
-        const sqlQuery =await utils.loadSQLQueries('Items');
-        
-        const result = await pool.query(sqlQuery.items,[CategoryId,`%${SearchText}%`]);  
-        console.log(result);      
+        const sqlQuery =await utils.loadSQLQueries('Items');        
+        const result = await pool.query(sqlQuery.items,[CategoryId ,`%${SearchText}%`]);          
         const items=result.rows;
 
         return {success:true,items:items};
