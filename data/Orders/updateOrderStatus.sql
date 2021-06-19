@@ -1,4 +1,4 @@
 
 INSERT INTO public."OrderStatus"(
-	 "OrderSummaryId", "StatusId", "Added On")
+	 "OrderSummaryId", "StatusId", "AddedOn")
 	VALUES ( $1, $2, CURRENT_TIMESTAMP);
