@@ -15,4 +15,16 @@ const AddOrder = async (req,res,next) =>{
     }     
 }
 
-module.exports={AddOrder}
+const GetOrders = async (req,res,next) =>{
+    try {
+        const {CustomerId} =req.query;               
+        const data= await OrdersData.GetOrders(CustomerId);
+        if(!data.success) return res.status(400).send(data.message);      
+        res.json(data);
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }
+}
+
+module.exports={AddOrder,GetOrders}

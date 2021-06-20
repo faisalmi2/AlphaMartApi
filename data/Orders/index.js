@@ -54,12 +54,13 @@ const AddOrdersToDB = async (OrderSummaryId,orderedItems) =>{
     }    
 }
 
-const PendingOrders = async (UserId) =>{
+const GetOrders = async (CustomerId) =>{
     try {
+        
         const pool = new Pool(config.sql);      
         const sqlQuery =await utils.loadSQLQueries('Orders');        
 
-        const result = await pool.query(sqlQuery.pendingOrders,[UserId]);
+        const result = await pool.query(sqlQuery.pendingOrders,[CustomerId]);
         const orders=result.rows
         
         
@@ -87,4 +88,4 @@ const UpdateOrderStatus = async (OrderSummaryId,StatusId=1) =>{
 }
 
 
-module.exports={AddOrderSummaryToDB,UpdateOrderStatus,PendingOrders}
+module.exports={AddOrderSummaryToDB,UpdateOrderStatus,GetOrders}
