@@ -53,13 +53,13 @@ const SignUp = async (user) =>{
 }
 
 
-const GetUsers = async () =>{
+const GetUsers = async (roleId) =>{
     try {
         
         const pool = new Pool(config.sql);       
         const sqlQuery =await utils.loadSQLQueries('Account');
        
-        const result = await pool.query(sqlQuery.contacts);        
+        const result = await pool.query(sqlQuery.contacts,[roleId]);        
         
         const users=result.rows;       
         
@@ -68,6 +68,23 @@ const GetUsers = async () =>{
         return 'data => GetUsers '+ err.message;
     }    
 }
+
+const GetCustomers = async () =>{
+    try {
+        
+        const pool = new Pool(config.sql);       
+        const sqlQuery =await utils.loadSQLQueries('Account');
+       
+        const result = await pool.query(sqlQuery.customers);        
+        
+        const users=result.rows;       
+        
+        return {success:true,data:users};
+    } catch (err) {
+        return 'data => GetUsers '+ err.message;
+    }    
+}
+
 const ActivateUser = async (UserId,value) =>{
     try {
         
@@ -90,4 +107,4 @@ async function GenerateHashedPassword(password)
     return hashed;
 }
 
-module.exports={Auth,GetUsers,SignUp,ActivateUser}
+module.exports={Auth,GetUsers,SignUp,ActivateUser,GetCustomers}

@@ -33,13 +33,22 @@ const SignUp= async (req,res,next)=>{
 
 const GetUsersData = async (req,res,next) =>{
   
-    try {
-       // console.log('header',req.test);
-        //const id=req.params.id;        
-        const data= await authData.GetUsers();        
+    try {      
+        const {roleId} =req.query;         
+        const data= await authData.GetUsers(roleId);        
         if(!data.success) return res.status(400).send(data.message);
          res.send(data);
         
+    } catch (error) {
+        
+    }
+}
+
+const GetCustomersData = async (req,res,next) =>{  
+    try {      
+        const data= await authData.GetCustomers();        
+        if(!data.success) return res.status(400).send(data.message);
+         res.send(data);        
     } catch (error) {
         
     }
@@ -49,7 +58,6 @@ const GetUsersData = async (req,res,next) =>{
 const ActivateDeactivateUser = async (req,res,next) =>{
   
     try {
-       // console.log('header',req.test);
         const UserId=req.body.UserId;        
         const value=req.body.value;       
 
@@ -84,4 +92,4 @@ function authenthicateToken(req,res,next)
     })
 }
 
-module.exports={Auth,GetUsersData,SignUp,authenthicateToken,ActivateDeactivateUser}
+module.exports={Auth,GetUsersData,SignUp,authenthicateToken,ActivateDeactivateUser,GetCustomersData}
