@@ -26,4 +26,15 @@ const GetCategories = async (req,res,next) =>{
     }     
 }
 
-module.exports={GetUnits,GetCategories}
+const GetStatus = async (req,res,next) =>{
+    try {                
+       const data= await lookUpData.GetStatusFromDb();
+       if(!data.success) return res.status(400).send(data.message);      
+       res.json(data.items);
+    } catch (err) {
+        console.log(err);
+        res.send(err);
+    }     
+}
+
+module.exports={GetUnits,GetCategories,GetStatus}

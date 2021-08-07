@@ -13,6 +13,9 @@ const app=express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(express.static(__dirname + '/public'));
+app.use('/uploads', express.static('uploads'));
+
 
 app.use('/api',accountRoutes.routes);
 app.use('/api',itemsRoutes.routes);

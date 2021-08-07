@@ -37,5 +37,20 @@ const GetCategoriesFromDb = async () =>{
 }
 
 
+const GetStatusFromDb = async () =>{
+    try {
+        const pool = new Pool(config.sql);       
+        const sqlQuery =await utils.loadSQLQueries('LookUpTables');
+        
+        const result = await pool.query(sqlQuery.status);              
+        const items=result.rows;
 
-module.exports={GetUnitsFromDb,GetCategoriesFromDb}
+        return {success:true,items:items};
+    } catch (err) {
+        console.log(err);
+        return {success:false,message:err.message};
+    }    
+}
+
+
+module.exports={GetUnitsFromDb,GetCategoriesFromDb,GetStatusFromDb}

@@ -25,9 +25,9 @@ const AdditemToDB = async (item) =>{
     try {
         const pool = new Pool(config.sql);       
         const sqlQuery =await utils.loadSQLQueries('Items');
-        const {ItemName,UnitId,Quantity,CostPrice,ActualPrice,SellingPrice,ItemCategoryId,IsActive,AddedBy}= item;
+        const {ItemName,UnitId,Quantity,CostPrice,ActualPrice,SellingPrice,ItemCategoryId,IsActive,AddedBy,FileExtension}= item;
 
-        const result = await pool.query(sqlQuery.addItem,[ItemName,UnitId,Quantity,CostPrice,ActualPrice,SellingPrice,ItemCategoryId,IsActive,AddedBy]);        
+        const result = await pool.query(sqlQuery.addItem,[ItemName,UnitId,Quantity,CostPrice,ActualPrice,SellingPrice,ItemCategoryId,IsActive,AddedBy,FileExtension]);        
        
         const itemId=result.rows[0].ItemId;       
         return {success:true,itemId:itemId};
